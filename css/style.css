@@ -1,0 +1,233 @@
+:root {
+    --color-fondo: #fdf8f3;
+    --color-secundario: #f3e5d8;
+    --color-principal: #8B5E3C;
+    --color-titulo: #6D4C41;
+    --color-blanco: #ffffff;
+    --color-borde: #cccccc;
+    --radio: 8px;
+}
+
+/* CONFIGURACIÓN GENERAL */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: var(--color-fondo);
+    color: var(--color-titulo);
+}
+
+header {
+    padding: 30px;
+    background-color: var(--color-secundario);
+    text-align: center;
+}
+
+main {
+    padding: 40px 20px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 40px;
+    color: var(--color-principal);
+}
+
+h2 {
+    font-size: 30px;
+    color: var(--color-titulo);
+}
+
+
+/* CONTENEDOR */
+
+.contenedor {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+
+/* ENLACES */
+
+a {
+    color: var(--color-principal);
+}
+
+.enlace {
+    display: inline-block;
+    color: var(--color-principal);
+    background-color: transparent;
+    padding: 0;
+    margin-top: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.enlace:hover {
+    text-decoration: underline;
+}
+
+
+/* BOTONES */
+
+button,
+.boton {
+    padding: 12px 30px;
+    border: none;
+    background-color: var(--color-principal);
+    color: var(--color-blanco);
+    font-size: 16px;
+    border-radius: var(--radio);
+    cursor: pointer;
+}
+
+button:hover,
+.boton:hover {
+    opacity: 0.9;
+}
+
+
+/* FORMULARIOS */
+
+form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 5px;
+}
+
+label {
+    font-weight: bold;
+    color: var(--color-titulo);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid var(--color-borde);
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: var(--color-blanco);
+}
+
+
+/* MENÚ */
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+nav a {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-principal);
+    padding: 8px 12px;
+    margin-top: 0;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: var(--radio);
+}
+
+nav a:hover {
+    background-color: var(--color-blanco);
+}
+
+
+/* BOTÓN DEL MENÚ */
+
+.boton-menu {
+    display: none;
+}
+
+
+/* VISTA CELULAR */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 20px;
+    }
+
+    main {
+        padding: 25px 15px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .contenedor {
+        width: 100%;
+        max-width: 500px;
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    button,
+    .boton {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    nav.mostrar {
+        display: flex;
+    }
+
+    nav a {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .boton-menu {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background-color: var(--color-principal);
+        color: var(--color-blanco);
+        border-radius: var(--radio);
+        cursor: pointer;
+    }
+}
+
+
+/* VISTA ESCRITORIO */
+
+@media (min-width: 769px) {
+
+    .contenedor {
+        max-width: 500px;
+        margin: 40px auto;
+    }
+}
