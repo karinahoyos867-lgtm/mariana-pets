@@ -1,7 +1,7 @@
 
 package com.marianapets.servlet;
 
-import com.marianapets.util.Conexion;
+import com.marianapets.dao.MascotaDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,49 +9,33 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controla las solicitudes para consultar las mascotas registradas.
+ * Delega las consultas de datos a la capa DAO.
+ */
 @WebServlet("/listar-mascotas")
 public class ListarMascotasServlet extends HttpServlet {
 
+    private final MascotaDAO mascotaDAO = new MascotaDAO();
+
+    /**
+     * Consulta las mascotas y las envía a la página JSP.
+     */
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Map<String, Object>> mascotas = new ArrayList<>();
-
-        String sql = "SELECT id, nombre, especie, raza, edad, propietario "
-                   + "FROM mascotas ORDER BY id";
-
-        try (Connection conexion = Conexion.conectar();
-             PreparedStatement consulta = conexion.prepareStatement(sql);
-             ResultSet resultados = consulta.executeQuery()) {
-
-            while (resultados.next()) {
-                Map<String, Object> mascota = new LinkedHashMap<>();
-
-                mascota.put("id", resultados.getInt("id"));
-                mascota.put("nombre", resultados.getString("nombre"));
-                mascota.put("especie", resultados.getString("especie"));
-                mascota.put("raza", resultados.getString("raza"));
-                mascota.put("edad", resultados.getInt("edad"));
-                mascota.put("propietario",
-                        resultados.getString("propietario"));
-
-                mascotas.add(mascota);
-            }
+        try {
+            List<Map<String, Object>> mascotas = mascotaDAO.listar();
 
             request.setAttribute("mascotas", mascotas);
             request.getRequestDispatcher("/mascotas.jsp")
-                   .forward(request, response);
+                    .forward(request, response);
 
         } catch (SQLException e) {
             getServletContext().log(
